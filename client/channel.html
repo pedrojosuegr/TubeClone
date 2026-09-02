@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>TubeClone - Meu canal</title>
+</head>
+<body>
+
+  <header>
+    <h1>TubeClone</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Início</a></li>
+        <li><a href="channel.html">Meu canal</a></li>
+        <li><a href="index.html">Sair</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section aria-labelledby="titulo-canal">
+      <h2 id="titulo-canal">Canal de Pedro</h2>
+      <p>Canal de exemplo utilizado para apresentar os vídeos publicados pelo usuário.</p>
+    </section>
+
+    <section aria-labelledby="titulo-upload">
+      <h2 id="titulo-upload">Publicar novo vídeo</h2>
+
+      <form action="#" method="post" enctype="multipart/form-data">
+        <div>
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" required>
+        </div>
+
+        <div>
+          <label for="descricao">Descrição</label>
+          <textarea id="descricao" name="descricao" rows="4"></textarea>
+        </div>
+
+        <div>
+          <label for="arquivo">Arquivo de vídeo</label>
+          <input type="file" id="arquivo" name="arquivo" accept="video/*">
+        </div>
+
+        <button type="submit">Publicar</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="titulo-meus-videos">
+      <h2 id="titulo-meus-videos">Meus vídeos</h2>
+
+      <article>
+        <h3><a href="video.html">Como fazer metanfetamina caseira</a></h3>
+        <p>Publicado em 01/09/2026</p>
+      </article>
+
+      <article>
+        <h3><a href="video.html">Como fazer um projeto web do bão</a></h3>
+        <p>Publicado em 25/08/2026</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 TubeClone</p>
+  </footer>
+
+</body>
+</html>
