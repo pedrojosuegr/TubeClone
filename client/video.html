@@ -2,27 +2,31 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Vídeo</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <h1>TubeClone</h1>
-    <nav>
-      <ul>
-        <li><a href="home.html">Início</a></li>
-        <li><a href="channel.html">Meu canal</a></li>
-        <li><a href="index.html">Sair</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>TubeClone</h1>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="home.html">Início</a></li>
+          <li><a href="channel.html">Meu canal</a></li>
+          <li><a href="index.html">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <article aria-labelledby="titulo-video">
-      <h2 id="titulo-video">Como fazer um projeto web do bão</h2>
+  <main class="page-main">
+    <article class="video-detail" aria-labelledby="titulo-video">
+      <h2 id="titulo-video">Como estruturar um projeto HTML semântico</h2>
       <p>Publicado por <a href="channel.html">Canal Exemplo</a> em 01/09/2026</p>
 
-      <video controls width="640">
+      <video controls>
         <source src="#" type="video/mp4">
         Seu navegador não suporta a exibição de vídeo.
       </video>
@@ -35,26 +39,28 @@
       <button type="button">Curtir</button>
     </article>
 
-    <section aria-labelledby="titulo-comentarios">
+    <section class="comments-section" aria-labelledby="titulo-comentarios">
       <h3 id="titulo-comentarios">Comentários</h3>
 
-      <form action="#" method="post">
-        <label for="comentario">Adicionar comentário</label>
-        <textarea id="comentario" name="comentario" rows="3"></textarea>
+      <form class="comment-form" action="#" method="post">
+        <div>
+          <label for="comentario">Adicionar comentário</label>
+          <textarea id="comentario" name="comentario" rows="3"></textarea>
+        </div>
         <button type="submit">Comentar</button>
       </form>
 
-      <article>
-        <p><strong>Usuário Exemplo:</strong> Do bão mesmo!</p>
+      <article class="comment-card">
+        <p><strong>Usuário Exemplo:</strong> Muito bom, ajudou bastante!</p>
       </article>
 
-      <article>
-        <p><strong>Outro Usuário:</strong> Tentei e meu pc explodiu.</p>
+      <article class="comment-card">
+        <p><strong>Outro Usuário:</strong> Ficou clara a explicação sobre as tags.</p>
       </article>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2026 TubeClone</p>
   </footer>
 

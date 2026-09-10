@@ -2,55 +2,63 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Início</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <h1>TubeClone</h1>
-    <nav>
-      <ul>
-        <li><a href="home.html">Início</a></li>
-        <li><a href="channel.html">Meu canal</a></li>
-        <li><a href="index.html">Sair</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>TubeClone</h1>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="home.html">Início</a></li>
+          <li><a href="channel.html">Meu canal</a></li>
+          <li><a href="index.html">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section aria-labelledby="titulo-pesquisa">
+  <main class="page-main">
+    <section class="search-section" aria-labelledby="titulo-pesquisa">
       <h2 id="titulo-pesquisa">Pesquisar vídeos</h2>
-      <form action="#" method="get" role="search">
-        <label for="busca">Pesquisar por título</label>
-        <input type="search" id="busca" name="busca" placeholder="Digite um título...">
+      <form class="search-form" action="#" method="get" role="search">
+        <div>
+          <label for="busca">Pesquisar por título</label>
+          <input type="search" id="busca" name="busca" placeholder="Digite um título...">
+        </div>
         <button type="submit">Buscar</button>
       </form>
     </section>
 
-    <section aria-labelledby="titulo-videos">
+    <section class="videos-section" aria-labelledby="titulo-videos">
       <h2 id="titulo-videos">Vídeos públicos</h2>
 
-      <article>
-        <h3><a href="video.html">Como fazer um projeto web do bão</a></h3>
-        <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
-        <p>Publicado em 01/09/2026</p>
-      </article>
+      <div class="video-grid">
+        <article class="video-card">
+          <h3><a href="video.html">Como estruturar um projeto HTML semântico</a></h3>
+          <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
+          <p>Publicado em 01/09/2026</p>
+        </article>
 
-      <article>
-        <h3><a href="video.html">Como fazer metanfetamina caseira</a></h3>
-        <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
-        <p>Publicado em 25/08/2026</p>
-      </article>
+        <article class="video-card">
+          <h3><a href="video.html">Introdução ao CSS responsivo</a></h3>
+          <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
+          <p>Publicado em 25/08/2026</p>
+        </article>
 
-      <article>
-        <h3><a href="video.html">Speedrun Zerando GTA 6 em 3 minutos</a></h3>
-        <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
-        <p>Publicado em 18/08/2026</p>
-      </article>
+        <article class="video-card">
+          <h3><a href="video.html">Primeiros passos com JavaScript</a></h3>
+          <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
+          <p>Publicado em 18/08/2026</p>
+        </article>
+      </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2026 TubeClone</p>
   </footer>
 

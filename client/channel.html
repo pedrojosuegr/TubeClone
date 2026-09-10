@@ -2,31 +2,35 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Meu canal</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <h1>TubeClone</h1>
-    <nav>
-      <ul>
-        <li><a href="home.html">Início</a></li>
-        <li><a href="channel.html">Meu canal</a></li>
-        <li><a href="index.html">Sair</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>TubeClone</h1>
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="home.html">Início</a></li>
+          <li><a href="channel.html">Meu canal</a></li>
+          <li><a href="index.html">Sair</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section aria-labelledby="titulo-canal">
+  <main class="page-main">
+    <section class="channel-info" aria-labelledby="titulo-canal">
       <h2 id="titulo-canal">Canal de Pedro</h2>
       <p>Canal de exemplo utilizado para apresentar os vídeos publicados pelo usuário.</p>
     </section>
 
-    <section aria-labelledby="titulo-upload">
+    <section class="upload-section" aria-labelledby="titulo-upload">
       <h2 id="titulo-upload">Publicar novo vídeo</h2>
 
-      <form action="#" method="post" enctype="multipart/form-data">
+      <form class="upload-form" action="#" method="post" enctype="multipart/form-data">
         <div>
           <label for="titulo">Título</label>
           <input type="text" id="titulo" name="titulo" required>
@@ -46,22 +50,24 @@
       </form>
     </section>
 
-    <section aria-labelledby="titulo-meus-videos">
+    <section class="videos-section" aria-labelledby="titulo-meus-videos">
       <h2 id="titulo-meus-videos">Meus vídeos</h2>
 
-      <article>
-        <h3><a href="video.html">Como fazer metanfetamina caseira</a></h3>
-        <p>Publicado em 01/09/2026</p>
-      </article>
+      <div class="video-grid">
+        <article class="video-card">
+          <h3><a href="video.html">Como estruturar um projeto HTML semântico</a></h3>
+          <p>Publicado em 01/09/2026</p>
+        </article>
 
-      <article>
-        <h3><a href="video.html">Como fazer um projeto web do bão</a></h3>
-        <p>Publicado em 25/08/2026</p>
-      </article>
+        <article class="video-card">
+          <h3><a href="video.html">Introdução ao CSS responsivo</a></h3>
+          <p>Publicado em 25/08/2026</p>
+        </article>
+      </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>&copy; 2026 TubeClone</p>
   </footer>
 

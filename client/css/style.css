@@ -1,0 +1,399 @@
+/* =========================================================
+   TubeClone — style.css
+   Organização do arquivo:
+   1. Variáveis (design tokens)
+   2. Reset básico
+   3. Layout global (header, nav, main, footer)
+   4. Formulários e botões
+   5. Página de login
+   6. Página inicial (busca + listagem de vídeos)
+   7. Página do canal (upload + lista de vídeos)
+   8. Página do vídeo (player + comentários)
+   9. Media queries (breakpoints responsivos)
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   1. Variáveis
+   --------------------------------------------------------- */
+:root {
+  --color-bg: #f5f5f7;
+  --color-surface: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5f5f66;
+  --color-primary: #6d28d9;
+  --color-primary-dark: #55209f;
+  --color-border: #e2e2e6;
+
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2.5rem;
+
+  --radius: 8px;
+  --max-width: 1200px;
+
+  --font-base: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------
+   2. Reset básico
+   --------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------------------------------------------------------
+   3. Layout global
+   --------------------------------------------------------- */
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-sm) var(--spacing-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.site-header h1 {
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.main-nav .nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+/* fallback de espaçamento para navegadores sem suporte a "gap" em flexbox */
+.main-nav .nav-list li {
+  margin-left: var(--spacing-md);
+}
+
+.main-nav .nav-list li:first-child {
+  margin-left: 0;
+}
+
+.main-nav a {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.page-main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--spacing-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   4. Formulários e botões
+   --------------------------------------------------------- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+input,
+textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+button {
+  align-self: flex-start;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.65rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* ---------------------------------------------------------
+   5. Página de login
+   --------------------------------------------------------- */
+body.login-page .page-main {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-card button {
+  align-self: stretch;
+}
+
+/* ---------------------------------------------------------
+   6. Página inicial — busca e listagem
+   --------------------------------------------------------- */
+.search-form {
+  flex-direction: row;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.search-form div {
+  flex: 1 1 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.search-form button {
+  align-self: flex-end;
+}
+
+/* Grid de vídeos: fallback em Flexbox, aprimorado com Grid
+   quando o navegador suporta (fallback gracioso). */
+.video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+@supports (display: grid) {
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}
+
+.video-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-sm);
+  flex: 1 1 260px;
+}
+
+.video-card h3 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+.video-card p {
+  margin: 0.2rem 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------
+   7. Página do canal
+   --------------------------------------------------------- */
+.channel-info {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+
+.upload-section {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+}
+
+.upload-form textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* ---------------------------------------------------------
+   8. Página do vídeo
+   --------------------------------------------------------- */
+.video-detail {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.video-detail video {
+  width: 100%;
+  border-radius: var(--radius);
+  background-color: #000;
+}
+
+.comments-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.comment-form textarea {
+  min-height: 70px;
+}
+
+.comment-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-sm);
+}
+
+/* ---------------------------------------------------------
+   9. Media queries — breakpoints responsivos
+   ---------------------------------------------------------
+   Breakpoint 1 (tablet):     max-width: 1024px
+   Breakpoint 2 (smartphone): max-width: 600px
+   --------------------------------------------------------- */
+
+/* --- Tablet (<=1024px) --- */
+@media (max-width: 1024px) {
+  .page-main {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-md);
+  }
+
+  .video-grid {
+    gap: var(--spacing-sm);
+  }
+
+  @supports (display: grid) {
+    .video-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+  }
+}
+
+/* --- Smartphone (<=600px) --- */
+@media (max-width: 600px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+
+  .main-nav .nav-list {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    width: 100%;
+  }
+
+  .main-nav .nav-list li {
+    margin-left: 0;
+    margin-top: var(--spacing-xs);
+  }
+
+  .main-nav .nav-list li:first-child {
+    margin-top: 0;
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-form div {
+    flex: none;
+  }
+
+  .search-form button {
+    align-self: stretch;
+  }
+
+  @supports (display: grid) {
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  button {
+    align-self: stretch;
+  }
+
+  .login-card {
+    padding: var(--spacing-md);
+  }
+}
