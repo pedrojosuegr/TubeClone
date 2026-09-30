@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Meu canal</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/channel.js" defer></script>
 </head>
 <body>
 
@@ -30,10 +31,11 @@
     <section class="upload-section" aria-labelledby="titulo-upload">
       <h2 id="titulo-upload">Publicar novo vídeo</h2>
 
-      <form class="upload-form" action="#" method="post" enctype="multipart/form-data">
+      <form class="upload-form" id="upload-form" novalidate>
         <div>
           <label for="titulo">Título</label>
-          <input type="text" id="titulo" name="titulo" required>
+          <input type="text" id="titulo" name="titulo">
+          <small class="field-error" id="erro-titulo"></small>
         </div>
 
         <div>
@@ -44,6 +46,7 @@
         <div>
           <label for="arquivo">Arquivo de vídeo</label>
           <input type="file" id="arquivo" name="arquivo" accept="video/*">
+          <small class="field-error" id="erro-arquivo"></small>
         </div>
 
         <button type="submit">Publicar</button>
@@ -53,16 +56,8 @@
     <section class="videos-section" aria-labelledby="titulo-meus-videos">
       <h2 id="titulo-meus-videos">Meus vídeos</h2>
 
-      <div class="video-grid">
-        <article class="video-card">
-          <h3><a href="video.html">Como estruturar um projeto HTML semântico</a></h3>
-          <p>Publicado em 01/09/2026</p>
-        </article>
-
-        <article class="video-card">
-          <h3><a href="video.html">Introdução ao CSS responsivo</a></h3>
-          <p>Publicado em 25/08/2026</p>
-        </article>
+      <div class="video-grid" id="meus-videos-grid">
+        <!-- Os vídeos são renderizados dinamicamente pelo js/channel.js -->
       </div>
     </section>
   </main>

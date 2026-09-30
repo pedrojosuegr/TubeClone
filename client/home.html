@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Início</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/home.js" defer></script>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
   <main class="page-main">
     <section class="search-section" aria-labelledby="titulo-pesquisa">
       <h2 id="titulo-pesquisa">Pesquisar vídeos</h2>
-      <form class="search-form" action="#" method="get" role="search">
+      <form class="search-form" id="search-form" role="search">
         <div>
           <label for="busca">Pesquisar por título</label>
           <input type="search" id="busca" name="busca" placeholder="Digite um título...">
@@ -36,24 +37,8 @@
     <section class="videos-section" aria-labelledby="titulo-videos">
       <h2 id="titulo-videos">Vídeos públicos</h2>
 
-      <div class="video-grid">
-        <article class="video-card">
-          <h3><a href="video.html">Como estruturar um projeto HTML semântico</a></h3>
-          <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
-          <p>Publicado em 01/09/2026</p>
-        </article>
-
-        <article class="video-card">
-          <h3><a href="video.html">Introdução ao CSS responsivo</a></h3>
-          <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
-          <p>Publicado em 25/08/2026</p>
-        </article>
-
-        <article class="video-card">
-          <h3><a href="video.html">Primeiros passos com JavaScript</a></h3>
-          <p>Canal: <a href="channel.html">Canal Exemplo</a></p>
-          <p>Publicado em 18/08/2026</p>
-        </article>
+      <div class="video-grid" id="video-grid">
+        <!-- Os vídeos são renderizados dinamicamente pelo js/home.js -->
       </div>
     </section>
   </main>

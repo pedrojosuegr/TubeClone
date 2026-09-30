@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Vídeo</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/video.js" defer></script>
 </head>
 <body>
 
@@ -36,28 +37,8 @@
         utilizando elementos semânticos como header, main, section e article.
       </p>
 
-      <button type="button">Curtir</button>
+      <button type="button" id="botao-curtir" data-curtidas="128"></button>
     </article>
-
-    <section class="comments-section" aria-labelledby="titulo-comentarios">
-      <h3 id="titulo-comentarios">Comentários</h3>
-
-      <form class="comment-form" action="#" method="post">
-        <div>
-          <label for="comentario">Adicionar comentário</label>
-          <textarea id="comentario" name="comentario" rows="3"></textarea>
-        </div>
-        <button type="submit">Comentar</button>
-      </form>
-
-      <article class="comment-card">
-        <p><strong>Usuário Exemplo:</strong> Muito bom, ajudou bastante!</p>
-      </article>
-
-      <article class="comment-card">
-        <p><strong>Outro Usuário:</strong> Ficou clara a explicação sobre as tags.</p>
-      </article>
-    </section>
   </main>
 
   <footer class="site-footer">

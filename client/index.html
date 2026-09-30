@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Login</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/login.js" defer></script>
 </head>
 <body class="login-page">
 
@@ -18,15 +19,17 @@
     <section class="login-card" aria-labelledby="titulo-login">
       <h2 id="titulo-login">Entrar</h2>
 
-      <form action="#" method="post">
+      <form id="login-form" novalidate>
         <div>
           <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" required>
+          <input type="email" id="email" name="email">
+          <small class="field-error" id="erro-email"></small>
         </div>
 
         <div>
           <label for="senha">Senha</label>
-          <input type="password" id="senha" name="senha" required>
+          <input type="password" id="senha" name="senha">
+          <small class="field-error" id="erro-senha"></small>
         </div>
 
         <button type="submit">Entrar</button>

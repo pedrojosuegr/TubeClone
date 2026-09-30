@@ -8,7 +8,7 @@
    5. Página de login
    6. Página inicial (busca + listagem de vídeos)
    7. Página do canal (upload + lista de vídeos)
-   8. Página do vídeo (player + comentários)
+   8. Página do vídeo (player)
    9. Media queries (breakpoints responsivos)
    ========================================================= */
 
@@ -23,6 +23,7 @@
   --color-primary: #6d28d9;
   --color-primary-dark: #55209f;
   --color-border: #e2e2e6;
+  --color-error: #c0392b;
 
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -116,11 +117,6 @@ img, video {
   margin-left: 0;
 }
 
-.main-nav a {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
 .page-main {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -184,6 +180,20 @@ button {
 
 button:hover {
   background-color: var(--color-primary-dark);
+}
+
+/* Mensagem de erro de validação, exibida/atualizada via JavaScript */
+.field-error {
+  display: block;
+  color: var(--color-error);
+  font-size: 0.85rem;
+  min-height: 1.1rem;
+}
+
+/* Estado vazio, exibido via JavaScript quando uma lista não tem itens */
+.empty-state {
+  color: var(--color-text-muted);
+  font-style: italic;
 }
 
 /* ---------------------------------------------------------
@@ -305,21 +315,9 @@ body.login-page .page-main {
   background-color: #000;
 }
 
-.comments-section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.comment-form textarea {
-  min-height: 70px;
-}
-
-.comment-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: var(--spacing-sm);
+/* Estado "curtido", alternado dinamicamente via JavaScript */
+#botao-curtir.curtido {
+  background-color: var(--color-primary-dark);
 }
 
 /* ---------------------------------------------------------
