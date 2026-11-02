@@ -395,3 +395,38 @@ body.login-page .page-main {
     padding: var(--spacing-md);
   }
 }
+
+/* ---------------------------------------------------------
+   10. Estados assíncronos (carregando, erro, sucesso)
+   Inseridos via JavaScript por js/components/status.js
+   --------------------------------------------------------- */
+.status {
+  margin: 0;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius);
+  flex: 1 1 100%;
+  grid-column: 1 / -1;
+}
+
+.status-loading {
+  color: var(--color-text-muted);
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+}
+
+.status-error {
+  color: var(--color-error);
+  background-color: #fdecea;
+  border: 1px solid var(--color-error);
+}
+
+.status-success {
+  color: #1e7e34;
+  background-color: #e8f5e9;
+  border: 1px solid #1e7e34;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

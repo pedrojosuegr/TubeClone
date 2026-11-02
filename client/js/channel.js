@@ -1,76 +1,88 @@
-// js/channel.js
-// Responsável pela validação e publicação de vídeos no canal (Etapa 04).
+// js/channel.js — ponto de entrada da página do canal.
+// Consulta os vídeos do canal e publica novos vídeos pelo serviço,
+// tratando carregamento, sucesso e erro nas duas operações.
+import { listarVideos, publicarVideo } from './services/api.js';
+import { validarUpload } from './utils/validacao.js';
+import { criarCardVideo } from './components/videoCard.js';
+import {
+  mostrarCarregando,
+  mostrarErro,
+  mostrarSucesso,
+  mostrarVazio,
+  limpar
+} from './components/status.js';
 
-document.addEventListener('DOMContentLoaded', function () {
-  var meusVideos = [
-    { titulo: 'Como estruturar um projeto HTML semântico', data: '01/09/2026' },
-    { titulo: 'Introdução ao CSS responsivo', data: '25/08/2026' }
-  ];
+const NOME_CANAL = 'Canal de Pedro';
 
-  var form = document.getElementById('upload-form');
-  var campoTitulo = document.getElementById('titulo');
-  var campoArquivo = document.getElementById('arquivo');
-  var erroTitulo = document.getElementById('erro-titulo');
-  var erroArquivo = document.getElementById('erro-arquivo');
-  var grid = document.getElementById('meus-videos-grid');
+const form = document.getElementById('upload-form');
+const campoTitulo = document.getElementById('titulo');
+const campoDescricao = document.getElementById('descricao');
+const campoArquivo = document.getElementById('arquivo');
+const erroTitulo = document.getElementById('erro-titulo');
+const erroArquivo = document.getElementById('erro-arquivo');
+const botaoPublicar = document.getElementById('botao-publicar');
+const statusUpload = document.getElementById('upload-status');
+const grid = document.getElementById('meus-videos-grid');
 
-  function dataAtualFormatada() {
-    return new Date().toLocaleDateString('pt-BR');
+let meusVideos = [];
+
+function renderizarMeusVideos() {
+  if (meusVideos.length === 0) {
+    mostrarVazio(grid, 'Você ainda não publicou nenhum vídeo.');
+    return;
   }
 
-  function criarCardVideo(video) {
-    var article = document.createElement('article');
-    article.className = 'video-card';
-    article.innerHTML =
-      '<h3><a href="video.html">' + video.titulo + '</a></h3>' +
-      '<p>Publicado em ' + video.data + '</p>';
-    return article;
+  grid.replaceChildren(...meusVideos.map((video) => criarCardVideo(video, false)));
+}
+
+async function carregarMeusVideos() {
+  mostrarCarregando(grid, 'Carregando seus vídeos...');
+
+  try {
+    const todos = await listarVideos();
+    meusVideos = todos.filter((video) => video.canal === NOME_CANAL);
+    renderizarMeusVideos();
+  } catch (erro) {
+    mostrarErro(grid, 'Não foi possível carregar seus vídeos: ' + erro.message);
+  }
+}
+
+function definirPublicando(publicando) {
+  botaoPublicar.disabled = publicando;
+  botaoPublicar.textContent = publicando ? 'Publicando...' : 'Publicar';
+}
+
+form.addEventListener('submit', async (evento) => {
+  evento.preventDefault();
+  limpar(statusUpload);
+
+  const erros = validarUpload(campoTitulo.value, campoArquivo.files.length);
+  erroTitulo.textContent = erros.titulo || '';
+  erroArquivo.textContent = erros.arquivo || '';
+
+  if (Object.keys(erros).length > 0) {
+    return;
   }
 
-  function renderizarMeusVideos() {
-    grid.innerHTML = '';
-    meusVideos.forEach(function (video) {
-      grid.appendChild(criarCardVideo(video));
-    });
-  }
+  definirPublicando(true);
+  mostrarCarregando(statusUpload, 'Enviando vídeo...');
 
-  function limparErros() {
-    erroTitulo.textContent = '';
-    erroArquivo.textContent = '';
-  }
-
-  function validarFormulario() {
-    limparErros();
-    var valido = true;
-
-    if (campoTitulo.value.trim().length < 3) {
-      erroTitulo.textContent = 'O título deve ter pelo menos 3 caracteres.';
-      valido = false;
-    }
-
-    if (campoArquivo.files.length === 0) {
-      erroArquivo.textContent = 'Selecione um arquivo de vídeo.';
-      valido = false;
-    }
-
-    return valido;
-  }
-
-  form.addEventListener('submit', function (evento) {
-    evento.preventDefault();
-
-    if (!validarFormulario()) {
-      return;
-    }
-
-    meusVideos.unshift({
+  try {
+    const novoVideo = await publicarVideo({
       titulo: campoTitulo.value.trim(),
-      data: dataAtualFormatada()
+      descricao: campoDescricao.value.trim(),
+      canal: NOME_CANAL
     });
 
+    meusVideos.unshift(novoVideo);
     renderizarMeusVideos();
     form.reset();
-  });
-
-  renderizarMeusVideos();
+    mostrarSucesso(statusUpload, 'Vídeo publicado com sucesso!');
+  } catch (erro) {
+    mostrarErro(statusUpload, 'Não foi possível publicar o vídeo: ' + erro.message);
+  } finally {
+    definirPublicando(false);
+  }
 });
+
+carregarMeusVideos();

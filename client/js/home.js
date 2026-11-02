@@ -1,65 +1,66 @@
-// js/home.js
-// Responsável pela listagem dinâmica e pela pesquisa de vídeos (Etapa 04).
+// js/home.js — ponto de entrada da página inicial.
+// Consulta os vídeos pelo serviço (assíncrono), trata carregamento e erro,
+// e filtra a lista em memória conforme o usuário digita.
+import { listarVideos } from './services/api.js';
+import { criarCardVideo } from './components/videoCard.js';
+import { mostrarCarregando, mostrarErro, mostrarVazio } from './components/status.js';
 
-document.addEventListener('DOMContentLoaded', function () {
-  var videos = [
-    { titulo: 'Como estruturar um projeto HTML semântico', canal: 'Canal Exemplo', data: '01/09/2026' },
-    { titulo: 'Introdução ao CSS responsivo', canal: 'Canal Exemplo', data: '25/08/2026' },
-    { titulo: 'Primeiros passos com JavaScript', canal: 'Canal Exemplo', data: '18/08/2026' }
-  ];
+const grid = document.getElementById('video-grid');
+const form = document.getElementById('search-form');
+const campoBusca = document.getElementById('busca');
 
-  var grid = document.getElementById('video-grid');
-  var form = document.getElementById('search-form');
-  var campoBusca = document.getElementById('busca');
+let videos = [];
+let carregando = false;
 
-  function criarCardVideo(video) {
-    var article = document.createElement('article');
-    article.className = 'video-card';
-    article.innerHTML =
-      '<h3><a href="video.html">' + video.titulo + '</a></h3>' +
-      '<p>Canal: <a href="channel.html">' + video.canal + '</a></p>' +
-      '<p>Publicado em ' + video.data + '</p>';
-    return article;
+function filtrarVideos(termo) {
+  const termoNormalizado = termo.trim().toLowerCase();
+
+  if (!termoNormalizado) {
+    return videos;
   }
 
-  function renderizarVideos(lista) {
-    grid.innerHTML = '';
+  return videos.filter((video) => video.titulo.toLowerCase().includes(termoNormalizado));
+}
 
-    if (lista.length === 0) {
-      var mensagem = document.createElement('p');
-      mensagem.className = 'empty-state';
-      mensagem.textContent = 'Nenhum vídeo encontrado para esta pesquisa.';
-      grid.appendChild(mensagem);
-      return;
-    }
+function renderizar() {
+  const lista = filtrarVideos(campoBusca.value);
 
-    lista.forEach(function (video) {
-      grid.appendChild(criarCardVideo(video));
-    });
+  if (lista.length === 0) {
+    const mensagem = campoBusca.value.trim()
+      ? 'Nenhum vídeo encontrado para esta pesquisa.'
+      : 'Ainda não há vídeos publicados.';
+    mostrarVazio(grid, mensagem);
+    return;
   }
 
-  function filtrarVideos(termo) {
-    var termoNormalizado = termo.trim().toLowerCase();
+  grid.replaceChildren(...lista.map((video) => criarCardVideo(video, true)));
+}
 
-    if (!termoNormalizado) {
-      return videos;
-    }
+async function carregarVideos() {
+  carregando = true;
+  mostrarCarregando(grid, 'Carregando vídeos...');
 
-    return videos.filter(function (video) {
-      return video.titulo.toLowerCase().indexOf(termoNormalizado) !== -1;
-    });
+  try {
+    videos = await listarVideos();
+    carregando = false;
+    renderizar();
+  } catch (erro) {
+    carregando = false;
+    mostrarErro(grid, 'Não foi possível carregar os vídeos: ' + erro.message);
   }
+}
 
-  function executarPesquisa() {
-    renderizarVideos(filtrarVideos(campoBusca.value));
+function aoPesquisar() {
+  if (!carregando && videos.length > 0) {
+    renderizar();
   }
+}
 
-  campoBusca.addEventListener('input', executarPesquisa);
+campoBusca.addEventListener('input', aoPesquisar);
 
-  form.addEventListener('submit', function (evento) {
-    evento.preventDefault();
-    executarPesquisa();
-  });
-
-  renderizarVideos(videos);
+form.addEventListener('submit', (evento) => {
+  evento.preventDefault();
+  aoPesquisar();
 });
+
+carregarVideos();

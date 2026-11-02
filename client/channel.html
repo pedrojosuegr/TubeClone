@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeClone - Meu canal</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="js/channel.js" defer></script>
+  <script type="module" src="js/channel.js"></script>
 </head>
 <body>
 
@@ -49,7 +49,8 @@
           <small class="field-error" id="erro-arquivo"></small>
         </div>
 
-        <button type="submit">Publicar</button>
+        <button type="submit" id="botao-publicar">Publicar</button>
+        <div id="upload-status" aria-live="polite"></div>
       </form>
     </section>
 

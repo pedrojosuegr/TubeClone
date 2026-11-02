@@ -1,0 +1,7 @@
+[
+  { "id": 1, "titulo": "Como estruturar um projeto HTML semântico", "canal": "Canal Exemplo", "data": "01/09/2026" },
+  { "id": 2, "titulo": "Introdução ao CSS responsivo", "canal": "Canal Exemplo", "data": "25/08/2026" },
+  { "id": 3, "titulo": "Primeiros passos com JavaScript", "canal": "Canal Exemplo", "data": "18/08/2026" },
+  { "id": 4, "titulo": "Meu primeiro layout com Flexbox", "canal": "Canal de Pedro", "data": "10/10/2026" },
+  { "id": 5, "titulo": "Entendendo o CSS Grid", "canal": "Canal de Pedro", "data": "03/10/2026" }
+]
